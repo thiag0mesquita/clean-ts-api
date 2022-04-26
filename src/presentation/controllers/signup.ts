@@ -5,11 +5,11 @@ import { badRequest } from '../helper/http-helper'
 
 export class SignUpController {
   handle (httpRequest: HttpRequest): HttpResponse {
-    if (!httpRequest.body.name) {
-      return badRequest(new MissingParamError('name')) // Retornando um BadRequest (Error 400) pq está faltando um parametro (name)
-    }
-    if (!httpRequest.body.email) {
-      return badRequest(new MissingParamError('email')) // Retornando um BadRequest (Error 400) pq está faltando um parametro (email)
+    const requiredFields = ['name', 'email'] // Paramentros recebidos
+    for (const field of requiredFields) {
+      if (!httpRequest.body[field]) {
+        return badRequest(new MissingParamError(field)) // Retornando um BadRequest (Error 400) pq está faltando um parametro
+      }
     }
   }
 }
