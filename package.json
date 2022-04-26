@@ -6,7 +6,10 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "test:staged": "jest --passWithNoTests",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint ./",
+    "lint:fix": "yarn lint --fix",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
