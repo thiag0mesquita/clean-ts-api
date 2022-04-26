@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",     //lugar onde vai ser gerado os arquivos JS
+    "module": "commonjs",   //gerar arquivos JS no formato CommonJS(versao que os navegadores aceitam)
+    "target": "es2019",
+    "esModuleInterop": true,
+    "allowJs": true
+  }
+}
