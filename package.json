@@ -11,6 +11,12 @@
     "lint:fix": "yarn lint --fix",
     "lint-staged": "lint-staged"
   },
+  "lint-staged": {
+    "*.ts": [
+      "eslint 'src/**' --fix",
+      "yarn run test:staged"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
