@@ -4,7 +4,10 @@ export const MongoHelper = {
   client: null as MongoClient, // TS funcione junto com o objeto do JS e não ter conflito
 
   async connect (uri: string): Promise<void> {
-    this.client = await MongoClient.connect(uri)
+    this.client = await MongoClient.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
   },
 
   async disconnect (): Promise<void> {
