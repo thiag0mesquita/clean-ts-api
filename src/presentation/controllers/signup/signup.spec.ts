@@ -163,6 +163,7 @@ describe('Singup Controller', () => {
     }
     const httpReponse = await sut.handle(httpRequest)
     expect(httpReponse.statusCode).toBe(500)
+    // @ts-ignore
     expect(httpReponse.body).toEqual(new ServerError())
   })
 
@@ -181,6 +182,7 @@ describe('Singup Controller', () => {
     }
     const httpReponse = await sut.handle(httpRequest)
     expect(httpReponse.statusCode).toBe(500)
+    // @ts-ignore
     expect(httpReponse.body).toEqual(new ServerError())
   })
 
