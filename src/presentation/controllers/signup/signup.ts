@@ -1,5 +1,5 @@
 import { HttpResponse, HttpRequest, EmailValidator, Controller, AddAccount, Validation } from './signup-protocols'
-import { MissingParamError, InvalidParamError } from '../../errors'
+import { InvalidParamError } from '../../errors'
 import { badRequest, serverError, ok } from '../../helper/http-helper'
 
 export class SignUpController implements Controller {
@@ -18,12 +18,6 @@ export class SignUpController implements Controller {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
         return badRequest(error)
-      }
-      const requiredFields = ['name', 'email', 'password', 'passwordConfirmation'] // Paramentros de testes recebidos de SingUp.spec
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamError(field)) // Retornando um BadRequest (Error 400) pq está faltando um parametro
-        }
       }
       const { name, email, password, passwordConfirmation } = httpRequest.body
       if (password !== passwordConfirmation) {
