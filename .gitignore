@@ -3,3 +3,5 @@ dist
 coverage
 globalConfig.json
 globalConfig.json
+data
+exit
