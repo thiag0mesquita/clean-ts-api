@@ -1,6 +1,6 @@
-import request from 'supertest'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import app from '../config/app'
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
+import request from 'supertest'
 import { Collection } from 'mongodb'
 import { hash } from 'bcrypt'
 

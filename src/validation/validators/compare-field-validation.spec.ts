@@ -1,6 +1,6 @@
 
-import { InvalidParamError } from '../../presentation/errors'
 import { CompareFieldValidation } from './compare-field-validation'
+import { InvalidParamError } from '@/presentation/errors'
 
 const makeSut = (): CompareFieldValidation => {
   return new CompareFieldValidation('field', 'fieldToCompare')

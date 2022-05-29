@@ -1,7 +1,7 @@
 {
   "extends": "standard-with-typescript",  //biblioteca de configuração do eslint
   "parserOptions": {                      //usar configuração do typescript
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": "off",
