@@ -26,9 +26,11 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
   private async loadBySurveyId (surveyId: string): Promise<SurveyResultModel> {
     const surveyResultCollection = await MongoHelper.getCollection('surveyResults')
     const query = new QueryBuilder()
+      // match: Filtrar
       .match({
         surveyId: new ObjectId(surveyId)
       })
+      // group: Agrupar
       .group({
         _id: 0,
         data: {
@@ -38,9 +40,11 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
           $sum: 1
         }
       })
+      // unwind: desagrupar um array em vários objetos
       .unwind({
         path: '$data'
       })
+      // lookup: fazer join com outra collection (tabela)
       .lookup({
         from: 'surveys',
         foreignField: '_id',
@@ -73,6 +77,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
       .unwind({
         path: '$_id.answer'
       })
+      // addFields: adiciona propriedades em um objeto
       .addFields({
         '_id.answer.count': '$count',
         '_id.answer.percent': {
@@ -91,6 +96,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
           $push: '$_id.answer'
         }
       })
+      // project: formatar o retorno
       .project({
         _id: 0,
         surveyId: '$_id.surveyId',
