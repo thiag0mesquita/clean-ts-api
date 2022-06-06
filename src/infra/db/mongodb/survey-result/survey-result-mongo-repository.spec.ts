@@ -17,9 +17,11 @@ const makeSurvey = async (): Promise<SurveyModel> => {
     question: 'any_question',
     answers: [{
       image: 'any_image',
-      answer: 'any_answer'
+      answer: 'any_answer_1'
     }, {
-      answer: 'other_answer'
+      answer: 'other_answer_2'
+    }, {
+      answer: 'other_answer_3'
     }],
     date: new Date()
   })
