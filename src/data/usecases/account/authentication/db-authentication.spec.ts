@@ -6,7 +6,7 @@ import {
   UpdateAccessTokenRepository
 } from './db-authentication-protocols'
 import { mockHashComparer, mockEncrypter, mockLoadAccountByEmailRepository, mockUpdateAccessTokenRepository } from '@/data/test'
-import { throwError, mockAuthentication } from '@/domain/test'
+import { throwError, mockAuthentication, mockAddAccountParams } from '@/domain/test'
 
 type SutTypes = {
   sut: DbAuthentication
@@ -49,8 +49,8 @@ describe('DbAuthentication UseCase', () => {
   test('Should returns null if LoadAccountByEmailRepository returns null', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(null)
-    const accessToken = await sut.auth(mockAuthentication())
-    expect(accessToken).toBeNull()
+    const model = await sut.auth(mockAuthentication())
+    expect(model).toBeNull()
   })
 
   test('Should call HashComparer with correct values', async () => {
@@ -70,8 +70,8 @@ describe('DbAuthentication UseCase', () => {
   test('Should returns null if HashComparer returns false', async () => {
     const { sut, hashCompareStub } = makeSut()
     jest.spyOn(hashCompareStub, 'compare').mockReturnValueOnce(Promise.resolve(false))
-    const accessToken = await sut.auth(mockAuthentication())
-    expect(accessToken).toBeNull()
+    const model = await sut.auth(mockAuthentication())
+    expect(model).toBeNull()
   })
 
   test('Should call Encrypter with correct id', async () => {
@@ -88,10 +88,11 @@ describe('DbAuthentication UseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return a token on success', async () => {
+  test('Should return an AuthenticationModel on success', async () => {
     const { sut } = makeSut()
-    const acessToken = await sut.auth(mockAuthentication())
-    expect(acessToken).toBe('any_token')
+    const { name, accessToken } = await sut.auth(mockAddAccountParams())
+    expect(accessToken).toBe('any_token')
+    expect(name).toBe('any_name')
   })
 
   test('Should call UpdateAccessTokenRepository with correct values', async () => {

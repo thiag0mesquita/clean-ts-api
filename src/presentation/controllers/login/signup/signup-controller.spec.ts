@@ -65,7 +65,7 @@ describe('Singup Controller', () => {
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut()
     const httpReponse = await sut.handle(mockRequest())
-    expect(httpReponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpReponse).toEqual(ok({ accessToken: 'any_token', name: 'any_name' }))
   })
 
   test('Should call Validation with correct values', async () => {
